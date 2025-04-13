@@ -1,0 +1,121 @@
+.dm-serif-text-regular {
+  font-family: "DM Serif Text", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.dm-serif-text-regular-italic {
+  font-family: "DM Serif Text", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.montserrat-400 {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400; 
+  font-style: normal;
+}
+.montserrat-500 {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500; 
+  font-style: normal;
+}
+
+/* Direct logo fix */
+.logo, .dark-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4.8rem;
+  width: auto;
+}
+
+/* By default (for dark backgrounds), show light logo and hide dark logo */
+.logo {
+  display: block;
+}
+
+.dark-logo {
+  display: none;
+}
+
+/* CSS fallback for light backgrounds */
+section.bg-white .logo,
+section.bg-light .logo,
+section.bg-brown .logo,
+section.bg-gradient-v .logo,
+section.bg-gradient-white .logo,
+section.bg-gradient-gray .logo {
+  display: none !important;
+}
+
+section.bg-white .dark-logo,
+section.bg-light .dark-logo,
+section.bg-brown .dark-logo,
+section.bg-gradient-v .logo,
+section.bg-gradient-white .logo,
+section.bg-gradient-gray .logo {
+  display: block !important;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.text-gray {
+  color: #808080;
+}
+
+.link-underline {
+  text-decoration: underline;
+}
+
+/* Progress Bar Styles */
+.progress-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.progress-bar.hidden {
+  transform: translateY(36px);
+}
+
+.progress-indicator {
+  position: absolute;
+  height: 5px;
+  top: 0;
+  left: 0;
+  background-color: #26303B;
+  opacity: 0.85;
+  transition: width 0.3s ease;
+}
+
+.progress-label {
+  color: #333;
+  font-size: 14px;
+  padding: 5px 15px 0 15px;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.progress-section {
+  font-weight: bold;
+  max-width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
