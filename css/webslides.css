@@ -289,8 +289,8 @@ img {
   height: auto;
   max-width: 100%; }
 
-img:hover {
-  opacity: .9; }
+/*img:hover {*/
+/*  opacity: .9; }*/
 
 svg:not(:root) {
   overflow: hidden; }
@@ -2378,14 +2378,14 @@ CV / News
 .toc li {
   counter-increment: item;
   display: table;
-  font-weight: 400;
+  font-weight: 500;
   margin-bottom: .8rem;
   margin-left: 0;
   -webkit-transition: .3s;
   transition: .3s;
   width: 100%; }
   .toc li li {
-    font-weight: 300;
+    font-weight: 400;
     margin-bottom: 0;
     margin-left: 0; }
   .toc li .toc-page:before {
@@ -2405,7 +2405,7 @@ CV / News
 
 .chapter {
   display: inline-block;
-  font-size: 1.8rem;
+  font-size: 2.4rem;
   line-height: 3.2rem;
   padding-right: .8rem; }
 
@@ -3760,7 +3760,8 @@ Table of Contents
 .toc,
 .toc ol > li:before,
 .chapter {
-  background-color: #f7f9fb; }
+  /*background-color: #f7f9fb; }*/
+  background-color: rgba(0, 20, 80, 0); }
 
 .toc li .toc-page:before {
   border-bottom: 1px dotted rgba(0, 0, 0, 0.9); }

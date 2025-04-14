@@ -1,0 +1,71 @@
+document.addEventListener('DOMContentLoaded', function() {
+  // Select all zoomable images
+  const images = document.querySelectorAll('.zoomable-image');
+  const overlay = document.getElementById('imageOverlay');
+  const expandedImg = document.getElementById('expandedImg');
+  const overlayCaption = document.getElementById('overlayCaption');
+  const closeButton = document.querySelector('.close-button');
+  
+  // Add click event to each image
+  images.forEach(img => {
+    img.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Get the image source and alt text
+      const imgSrc = this.src;
+      
+      // Get the caption text from the parent li element
+      // This extracts the text that comes after the image
+      const parentLi = this.closest('li');
+      let captionText = '';
+      
+      if (parentLi) {
+        // Get all text nodes directly inside the li element
+        const textNodes = Array.from(parentLi.childNodes)
+          .filter(node => node.nodeType === Node.TEXT_NODE)
+          .map(node => node.textContent.trim())
+          .filter(text => text.length > 0);
+        
+        // If no direct text nodes found, try to get the last text content
+        if (textNodes.length === 0) {
+          // Get the li's text content and remove any leading/trailing whitespace
+          const fullText = parentLi.textContent.trim();
+          // Extract just the caption text that appears after the image
+          captionText = fullText;
+        } else {
+          captionText = textNodes.join(' ');
+        }
+      }
+      
+      // Set the expanded image source and caption
+      expandedImg.src = imgSrc;
+      overlayCaption.textContent = captionText;
+      
+      // Display the overlay
+      overlay.style.display = 'block';
+      
+      // Prevent the click from triggering slide navigation
+      return false;
+    });
+  });
+  
+  // Close overlay when clicking the close button
+  closeButton.addEventListener('click', function() {
+    overlay.style.display = 'none';
+  });
+  
+  // Close overlay when clicking outside the image
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) {
+      overlay.style.display = 'none';
+    }
+  });
+  
+  // Close overlay when pressing Escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      overlay.style.display = 'none';
+    }
+  });
+});

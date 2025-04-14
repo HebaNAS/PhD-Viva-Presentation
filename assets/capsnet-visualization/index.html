@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CapsNet Visualization</title>
+  <style>
+    body { margin: 0; overflow: hidden; font-family: Arial, sans-serif; }
+    canvas { display: block; }
+    
+    #info {
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      color: #333;
+      font-size: 14px;
+      pointer-events: none;
+    }
+    
+    #legend {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 15px;
+      border-radius: 5px;
+      font-size: 12px;
+      color: #333;
+      max-width: 230px;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    
+    .legend-color {
+      width: 15px;
+      height: 15px;
+      margin-right: 8px;
+      border-radius: 3px;
+    }
+    
+    #equations {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 15px;
+      border-radius: 5px;
+      font-size: 12px;
+      color: #333;
+      max-width: 280px;
+    }
+    
+    .equation {
+      margin-bottom: 10px;
+    }
+    
+    .equation-title {
+      font-weight: bold;
+      margin-bottom: 3px;
+    }
+    
+    .equation-formula {
+      font-family: 'Courier New', monospace;
+      background-color: rgba(240, 240, 240, 0.7);
+      padding: 5px;
+      border-radius: 3px;
+    }
+    
+    .layer-label {
+      position: absolute;
+      color: #333;
+      font-weight: bold;
+      font-size: 14px;
+      text-shadow: 1px 1px 2px white;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  
+  <div id="info">Interactive CapsNet Visualization - Drag to rotate, scroll to zoom</div>
+  
+  <div id="legend">
+    <h3 style="margin-top: 0;">CapsNet Components</h3>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #3B2667;"></div>
+      <div>Conv Feature Maps</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #4285F4;"></div>
+      <div>Primary Capsules</div>
+    </div>
+    <div class="legend-item">
+      <div class="legend-color" style="background-color: #EA4335;"></div>
+      <div>Class Capsules</div>
+    </div>
+  </div>
+  
+  <!--<div id="equations">-->
+  <!--  <h3 style="margin-top: 0;">Key Equations</h3>-->
+  <!--  <div class="equation">-->
+  <!--    <div class="equation-title">Squashing Function:</div>-->
+  <!--    <div class="equation-formula">v_j = ||s_j||² / (1 + ||s_j||²) · (s_j / ||s_j||)</div>-->
+  <!--  </div>-->
+  <!--  <div class="equation">-->
+  <!--    <div class="equation-title">Routing by Agreement:</div>-->
+  <!--    <div class="equation-formula">c_ij = softmax(b_ij)<br>s_j = Σ_i c_ij û_j|i</div>-->
+  <!--  </div>-->
+  <!--  <div class="equation">-->
+  <!--    <div class="equation-title">Agreement Calculation:</div>-->
+  <!--    <div class="equation-formula">a_ij = v_j · û_j|i</div>-->
+  <!--  </div>-->
+  <!--</div>-->
+  
+  <div id="layer-labels">
+    <div class="layer-label" style="left: 20%; top: 80%;">Conv Features</div>
+    <div class="layer-label" style="left: 50%; top: 80%;">Primary Capsules</div>
+    <div class="layer-label" style="left: 80%; top: 80%;">Class Capsules</div>
+  </div>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.min.js"></script>
+  
+  <script>
+    // Scene setup
+    const container = document.getElementById('container');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xf7f7f7);
+    
+    // Camera setup
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 11;
+    camera.position.x = 5;
+    
+    // Renderer setup
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    container.appendChild(renderer.domElement);
+    
+    // Controls
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.25;
+    
+    // Lights
+    const ambientLight = new THREE.AmbientLight(0xcccccc, 0.7);
+    scene.add(ambientLight);
+    
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.9);
+    directionalLight.position.set(1, 1, 1).normalize();
+    scene.add(directionalLight);
+    
+    // Materials
+    const primaryCapsMaterial = new THREE.MeshPhongMaterial({ color: 0x4285F4 });
+    const classCapsMaterial = new THREE.MeshPhongMaterial({ color: 0xEA4335 });
+    const convLayerMaterial = new THREE.MeshPhongMaterial({ color: 0x3B2667 });
+    const weakLineMaterial = new THREE.LineBasicMaterial({ 
+      color: 0xdddddd, 
+      transparent: true, 
+      opacity: 0.6,
+      linewidth: 1 
+    });
+    const strongLineMaterial = new THREE.LineBasicMaterial({ 
+      color: 0x000000, 
+      transparent: true, 
+      opacity: 0.9,
+      linewidth: 2 
+    });
+    const transformLineMaterial = new THREE.LineBasicMaterial({ 
+      color: 0xaaaaaa, 
+      transparent: true, 
+      opacity: 0.7 
+    });
+
+    // Create CapsNet Architecture
+    function createCapsNetArchitecture() {
+      const architecture = new THREE.Group();
+      
+      // Convolutional Layer - simple stack of feature maps
+      const convLayer = new THREE.Group();
+      convLayer.position.x = -8;
+
+      // Number of feature maps to show in the stack
+      const numFeatureMaps = 9;
+
+      // Create a stack of feature maps aligned in one dimension
+      for (let i = 0; i < numFeatureMaps; i++) {
+        // Create a square feature map
+        const featureMap = new THREE.Mesh(
+          new THREE.BoxGeometry(0.8, 0.8, 0.1),
+          convLayerMaterial
+        );
+        
+        // Position feature maps in a stack, with each one slightly behind the previous
+        featureMap.position.set(
+          0,          // All centered on y-axis
+          0,
+          i * 0.9,  // Small x offset - each map is slightly further back          // All centered on z-axis
+        );
+        
+        convLayer.add(featureMap);
+      }
+
+      architecture.add(convLayer);
+      
+      // Primary Capsules Layer
+      const primaryCapsLayer = new THREE.Group();
+      primaryCapsLayer.position.x = 0;
+      
+      const primaryCaps = [];
+      // Create directions for capsule vectors (to demonstrate different orientations)
+      const primaryDirections = [
+        new THREE.Vector3(1, 0.2, 0.1).normalize(),   // Slightly upward
+        new THREE.Vector3(1, -0.1, 0.2).normalize(),  // Slightly downward
+        new THREE.Vector3(1, 0.1, -0.2).normalize()   // Slightly different
+      ];
+      
+      for (let i = 0; i < 3; i++) {
+        const capsule = new THREE.Mesh(
+          new THREE.SphereGeometry(0.7, 32, 32),
+          primaryCapsMaterial
+        );
+        capsule.position.set(0, i * 3 - 3, 0);
+        primaryCapsLayer.add(capsule);
+        primaryCaps.push(capsule);
+        
+        // Add vector representation (arrow) with different orientations
+        const arrowHelper = new THREE.ArrowHelper(
+          primaryDirections[i],
+          capsule.position,
+          2,
+          0x4285F4,
+          0.4,
+          0.2
+        );
+        primaryCapsLayer.add(arrowHelper);
+      }
+      
+      architecture.add(primaryCapsLayer);
+      
+      // Class Capsules Layer
+      const classCapsLayer = new THREE.Group();
+      classCapsLayer.position.x = 8;
+      
+      // Create directions for class capsule vectors (to show alignment with primary capsules)
+      const classDirections = [
+        new THREE.Vector3(1, 0.2, 0.1).normalize(),  // Aligned with primary[0]
+        new THREE.Vector3(1, -0.3, 0.1).normalize()  // Not well aligned with any primary
+      ];
+      
+      const classCaps = [];
+      for (let i = 0; i < 2; i++) {
+        const capsule = new THREE.Mesh(
+          new THREE.SphereGeometry(0.8, 32, 32),
+          classCapsMaterial
+        );
+        capsule.position.set(0, i * 6 - 3, 0);
+        classCapsLayer.add(capsule);
+        classCaps.push(capsule);
+        
+        // Add vector representation (arrow)
+        const arrowHelper = new THREE.ArrowHelper(
+          classDirections[i],
+          capsule.position,
+          2,
+          0xEA4335,
+          0.4,
+          0.2
+        );
+        classCapsLayer.add(arrowHelper);
+      }
+      
+      architecture.add(classCapsLayer);
+      
+      // Connect Conv to Primary Capsules with lines
+      for (let i = 0; i < 9; i++) {
+        const convPos = new THREE.Vector3(
+          convLayer.position.x,
+          convLayer.position.y,
+          i * 0.9 + convLayer.position.z
+        );
+        
+        // Connect to the nearest primary capsule
+        const closestPrimaryCap = primaryCaps[Math.floor(i / 3)];
+        const primaryCapPos = new THREE.Vector3(
+          primaryCapsLayer.position.x,
+          closestPrimaryCap.position.y + primaryCapsLayer.position.y,
+          closestPrimaryCap.position.z + primaryCapsLayer.position.z
+        );
+        
+        const lineGeometry = new THREE.BufferGeometry().setFromPoints([convPos, primaryCapPos]);
+        const line = new THREE.Line(lineGeometry, transformLineMaterial);
+        architecture.add(line);
+      }
+      
+      // Dynamic Routing - Connect Primary Capsules to Class Capsules with varying strengths
+      // Define which connections should be strong (showing good agreement)
+      const strongConnections = [
+        {primary: 0, class: 0},  // Strong alignment between primary[0] and class[0]
+        {primary: 1, class: 1}   // Strong alignment between primary[1] and class[1]
+      ];
+      
+      // Function to check if a connection is strong
+      const isStrongConnection = (primaryIdx, classIdx) => {
+        return strongConnections.some(conn => 
+          conn.primary === primaryIdx && conn.class === classIdx
+        );
+      };
+      
+      for (let i = 0; i < primaryCaps.length; i++) {
+        const primaryCapPos = new THREE.Vector3(
+          primaryCapsLayer.position.x,
+          primaryCaps[i].position.y + primaryCapsLayer.position.y,
+          primaryCaps[i].position.z + primaryCapsLayer.position.z
+        );
+        
+        // Connect each primary capsule to all class capsules
+        for (let j = 0; j < classCaps.length; j++) {
+          const classCapPos = new THREE.Vector3(
+            classCapsLayer.position.x,
+            classCaps[j].position.y + classCapsLayer.position.y,
+            classCaps[j].position.z + classCapsLayer.position.z
+          );
+          
+          // Check if this should be a strong connection
+          const isStrong = isStrongConnection(i, j);
+          
+          const lineGeometry = new THREE.BufferGeometry().setFromPoints([primaryCapPos, classCapPos]);
+          const line = new THREE.Line(
+            lineGeometry, 
+            isStrong ? strongLineMaterial : weakLineMaterial
+          );
+          
+          architecture.add(line);
+        }
+      }
+      
+      return architecture;
+    }
+    
+    // Add to scene
+    const capsNetModel = createCapsNetArchitecture();
+    scene.add(capsNetModel);
+    
+    // Animation: Make the strong connections "pulse" to show active routing
+    const clock = new THREE.Clock(); 
+
+    // Animation
+    function animate() {
+      requestAnimationFrame(animate);
+      
+      // Subtle pulse animation for the whole model
+      const time = clock.getElapsedTime();
+      const pulseScale = 1 + 0.02 * Math.sin(time * 0.5);
+      capsNetModel.scale.set(pulseScale, pulseScale, pulseScale);
+      
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      
+      // Reposition layer labels
+      updateLayerLabels();
+    });
+    
+    // Position the layer labels based on window size
+    function updateLayerLabels() {
+      const labels = document.querySelectorAll('.layer-label');
+      
+      // Position Conv Features label
+      labels[0].style.left = '20%';
+      labels[0].style.top = '80%';
+      
+      // Position Primary Capsules label
+      labels[1].style.left = '50%';
+      labels[1].style.top = '80%';
+      
+      // Position Class Capsules label
+      labels[2].style.left = '80%';
+      labels[2].style.top = '80%';
+    }
+    
+    // Initial label positioning
+    updateLayerLabels();
+    
+    // Start animation
+    animate();
+  </script>
+
+  <script>
+    // Wait for the scene to be fully loaded
+    window.addEventListener('load', function() {
+      // Get the Three.js canvas
+      const canvas = document.querySelector('canvas');
+      
+      // Create a tooltip
+      const tooltip = document.createElement('div');
+      tooltip.style.position = 'absolute';
+      tooltip.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+      tooltip.style.border = '1px solid #ccc';
+      tooltip.style.borderRadius = '5px';
+      tooltip.style.padding = '10px';
+      tooltip.style.color = '#333';
+      tooltip.style.display = 'none';
+      tooltip.style.zIndex = '1000';
+      tooltip.style.maxWidth = '280px';
+      tooltip.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+      document.body.appendChild(tooltip);
+      
+      // Function to create vector component visualization HTML
+      function createVectorVisualization(count, color) {
+        let html = `
+          <div style="margin-top: 8px; margin-bottom: 8px;">
+            <div style="font-size: 12px; margin-bottom: 4px;"><b>Vector Components:</b></div>
+            <div style="display: flex; align-items: center;">
+        `;
+        
+        // Create dots for each component
+        for (let i = 0; i < count; i++) {
+          // Random intensity to simulate different values
+          const intensity = Math.random();
+          const opacity = 0.3 + (intensity * 0.7); // Make sure even low values are visible
+          
+          html += `
+            <div style="
+              width: 12px;
+              height: 12px;
+              border-radius: 50%;
+              background-color: ${color};
+              opacity: ${opacity};
+              margin-right: 2px;
+            " title="Component ${i+1}"></div>
+          `;
+        }
+        
+        html += `
+            </div>
+          </div>
+        `;
+        
+        return html;
+      }
+      
+      // Click handler
+      canvas.addEventListener('click', function(event) {
+        // Convert mouse position
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        
+        // Primary capsules region (middle of screen)
+        if (x > rect.width * 0.4 && x < rect.width * 0.6) {
+          // Create HTML for tooltip
+          tooltip.innerHTML = `
+            <div style="font-weight: bold; margin-bottom: 5px;">Primary Capsule</div>
+            <div>8-dimensional vector containing:</div>
+            <ul style="margin-top: 5px; padding-left: 20px; margin-bottom: 5px;">
+              <li>Position (x,y)</li>
+              <li>Orientation</li>
+              <li>Scale</li>
+              <li>Other spatial properties</li>
+            </ul>
+            ${createVectorVisualization(8, 'rgba(66, 133, 244, 1)')}
+          `;
+          tooltip.style.left = `${event.clientX + 15}px`;
+          tooltip.style.top = `${event.clientY - 10}px`;
+          tooltip.style.display = 'block';
+        }
+        // Class capsules region (right side of screen)
+        else if (x > rect.width * 0.7) {
+          // Create HTML for tooltip
+          tooltip.innerHTML = `
+            <div style="font-weight: bold; margin-bottom: 5px;">Class Capsule</div>
+            <div>16-dimensional vector containing:</div>
+            <ul style="margin-top: 5px; padding-left: 20px; margin-bottom: 5px;">
+              <li>Class probability (vector norm)</li>
+              <li>Entity instantiation properties</li>
+            </ul>
+            ${createVectorVisualization(16, 'rgba(234, 67, 53, 1)')}
+          `;
+          tooltip.style.left = `${event.clientX + 15}px`;
+          tooltip.style.top = `${event.clientY - 10}px`;
+          tooltip.style.display = 'block';
+        }
+        else {
+          // Hide tooltip if click is elsewhere
+          tooltip.style.display = 'none';
+        }
+      });
+      
+      // Hide tooltip when clicking elsewhere
+      document.addEventListener('click', function(event) {
+        if (event.target !== canvas) {
+          tooltip.style.display = 'none';
+        }
+      });
+    });
+  </script>
+      
+</body>
+</html>

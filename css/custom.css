@@ -72,6 +72,15 @@ section.bg-gradient-gray .logo {
   text-decoration: underline;
 }
 
+@media screen and (max-width: 1023px) {
+  .slide-title {
+    text-align: center;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /* Progress Bar Styles */
 .progress-bar {
   position: fixed;
@@ -119,3 +128,116 @@ section.bg-gradient-gray .logo {
   text-overflow: ellipsis;
 }
 
+.citation {
+  position: relative;
+  display: inline-block;
+}
+
+.citation-icon {
+  cursor: pointer;
+  font-size: 0.8em;
+  vertical-align: super;
+  color: #3366cc;
+}
+
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(51, 51, 51, 0.95);
+  color: white;
+  text-align: center;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: 14px;
+  width: max-content;
+  max-width: 300px;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip a {
+  color: #66ccff;
+  text-decoration: underline;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(51, 51, 51, 0.95) transparent transparent transparent;
+}
+
+.citation:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.zoomable-image {
+  transition: transform 0.2s;
+}
+
+.zoomable-image:hover {
+  transform: scale(1.05);
+}
+
+.image-overlay {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.overlay-content {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+#expandedImg {
+  width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+#overlayCaption {
+  font-size: 1.2em;
+  padding-bottom: 2.4rem;
+}
+
+.close-button {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-button:hover {
+  color: #bbb;
+}

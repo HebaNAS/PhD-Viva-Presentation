@@ -25,6 +25,9 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" media="all" href="css/custom.css">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   </head>
 
   <body>
@@ -57,26 +60,446 @@
         </section>
 
         <!-- Slide 2 -->
-        <section id="section-2" class="bg-gradient-white" data-section-title="Intro">
+        <section id="section-2" class="bg-gradient-white" data-section-title="Introduction">
           <div class="aligncenter fadeInUp">
             <span>Presented by</span>
-            <h3>Heba El-Shimy</h3>
+            <h3 class="dm-serif-text-regular">Heba El-Shimy</h3>
+            <div class="aligncenter" style="margin-top: 1rem;">
+              <span style="display: block;">Provost Fellow | PhD Candidate</span>
+              <span style="display: block;">School of Mathematical and Computer Sciences</span>
+              <span style="display: block;">Heriot-Watt University Dubai</span>
+              <span style="display: block;">Email: <a href="mailto:H.Elshimy@hw.ac.uk" target="_blank">H.Elshimy@hw.ac.uk</a></span>
+              <span style="display: block;">Webpage: <a href="https://www.macs.hw.ac.uk/~he4002/" target="_blank">www.macs.hw.ac.uk/~he4002/</a></span>
+            </div>
+            <hr>
             
             <div style="margin-top: 50px;">
               <span >Supervisors</span>
-              <h3>Prof. Hind Zantout</h3>
-              <h3>Prof. Michael Lones</h3>
-              <h3>Dr. Neamat El Gayar</h3>
+              <h3 class="dm-serif-text-regular">Prof. Hind Zantout</h3>
+              <h3 class="dm-serif-text-regular">Prof. Michael Lones</h3>
+              <h3 class="dm-serif-text-regular">Dr. Neamat El Gayar</h3>
             </div>
+          </div>
+
+          <div style="position: absolute; bottom: 50px; right: 20px; width: 8.5%;">
+            <span style="text-align: center;">Link to slides</span>
+            <img src="images/Image.png" alt="qr-code" class="qr-code">
           </div>
         </section>
 
         <!-- Slide 3 -->
-        <section id="section-3" class="bg-gradient-white" data-section-title="Intro">
-       
+        <section id="section-3" class="bg-gradient-white slide-top" data-section-title="Outline"> 
+          <div class="size-70 content-left" style="margin: 7rem 0 0 10rem;">
+            <h3 class="dm-serif-text-regular slide-title">Outline</h3>
+            <hr>
+            <div class="toc">
+              <ol>
+                <li>
+                  <a href="#slide=4" title="Go to Context">
+                    <span class="chapter">Context</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#slide=10" title="Go to Gap and Research Questions">
+                    <span class="chapter">Gap and Research Questions</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#slide=12" title="Go to Contributions">
+                    <span class="chapter">Contributions</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#slide=12" title="Go to Introduction to Capsule Networks">
+                    <span class="chapter">Introduction to Capsule Networks</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#slide=5" title="Go to Methodology">
+                    <span class="chapter">Methodology</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#slide=5" title="Go to Key Results">
+                    <span class="chapter">Key Results</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#slide=5" title="Go to CapsNets Explainability">
+                    <span class="chapter">CapsNets Explainability</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#slide=5" title="Go to Impact and Applications">
+                    <span class="chapter">Impact and Applications</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#slide=5" title="Go to Conclusions">
+                    <span class="chapter">Conclusions</span>
+                  </a>
+                </li>
+              </ol>
+            </div>
+            <!-- end .toc -->
+            </div>
         </section>
+
+        <!-- Slide 4 -->
+        <section id="section-4" class="bg-gradient-white slide-top" data-section-title="Context">
+          <div class="wrap content-left" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">Context</h2>
+            <hr>
+            <div>
+              <p style="font-size: 3.5rem; line-height: 6rem;">
+              Investigating methods to develop a system (CADe/x) that could correctly <span style="text-decoration: underline;">detect</span> and <span style="text-decoration: underline;">diagnose</span> colonic polyps; giving <span style="text-decoration: underline;">visual</span> and <span style="text-decoration: underline;">textual</span> explanations for its decisions.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 5 -->
+        <section id="section-5" class="bg-gradient-white slide-top" data-section-title="Context">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">Context</h2>
+            <hr>
+            <div class="size-60">
+              <h3 class="text-subtitle text-gray" style="text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6) !important;">Why Colon Cancer?</h3>
+              <ul style="margin-top: 2rem; font-size: 2.5rem; width: 100%; list-style: disc;">
+                <li style="margin-bottom: 2.4rem;">
+                  Second most fatal type of cancer worldwide and in the UAE. Prevalence is expected to triple in the UAE by 2040
+                  <span class="citation">
+                    <span class="citation-icon">ℹ️</span>
+                    <div class="tooltip">
+                      Data Source: GLOBOCAN 2024.<br>
+                      Available at: Global Cancer Observatory<br>
+                      <a href='https://gco.iarc.fr' target='_blank'>https://gco.iarc.fr</a>
+                    </div>
+                  </span>
+                </li>
+                <li style="margin-bottom: 2.4rem;">
+                  Early detection is key in enhancing disease prognosis and saving patients’ lives
+                </li>
+                <li style="margin-bottom: 2.4rem;">
+                  Screening and detection while performing a colonoscopy procedure. Time-limited and live, requires expertise and attention
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 6 -->
+        <section id="section-6" class="bg-gradient-white slide-top" data-section-title="Context">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">Context</h2>
+            <hr>
+            <div>
+              <h3 class="text-subtitle text-gray" style="text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6) !important;">
+                Why 
+                <span style="text-transform: none !important;">CADe</span> or 
+                <span style="text-transform: none !important;">CADx</span>?
+              </h3>
+              <div class="grid ms">
+                <div class="column">
+                  <ul style="margin-top: 2rem; font-size: 2.5rem; list-style: disc !important; list-style-type: disc !important;">
+                    <li style="margin-bottom: 2.4rem; list-style-type: disc !important;">
+                      Lesions have visual features used to classify them into benign, precancerous or cancerous
+                    </li>
+                    <li style="margin-bottom: 2.4rem; list-style-type: disc !important;">
+                      Subtle differences in visual features can be hard to detect by the human eye
+                    </li>
+                    <li style="margin-bottom: 2.4rem; list-style-type: disc !important;">
+                      Clinicians could miss lesions or misdiagnose them; leading to unnecessary procedures or delayed treatment and unfavourable outcomes
+                    </li>
+                  </ul>
+                </div>
+                <div class="column">
+                  <img src="images/polyps1.png" alt="polyp" style="width: 65%; height: auto; margin-top: -2.4rem;" />
+                </div>
+              </div>
+            </div>
+            <div style="font-size: 0.8rem; line-height: 1rem !important;">
+              <span>Images source: PICCOLO Dataset. <br/>
+                <a href="https://doi.org/10.3390/app10238501" target="_blank">S´anchez-Peralta, L. F., Pagador, J. B., Pic´on, A., Calder´on, A. J., Polo, F., Andraka, N., Bilbao, R., Glover, B., Saratxaga, C. L., & S´anchez-Margallo, F. M. (2020). PICCOLO White-Light and Narrow-Band Imaging Colonoscopic Dataset: A Performance Comparative of Models and Datasets. Applied Sciences, 10 (23), 8501. https://doi.org/10.3390/app10238501</a>
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 7 -->
+        <section id="section-7" class="bg-gradient-white slide-top" data-section-title="Context">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">Context</h2>
+            <hr>
+            <div>
+              <h3 class="text-subtitle text-gray" style="text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6) !important;">
+                Why 
+                <span style="text-transform: none !important;">CADe</span> or 
+                <span style="text-transform: none !important;">CADx</span>?
+              </h3>
+              <div class="grid ms">
+                <div class="column">
+                  <ul style="margin-top: 2rem; font-size: 2.5rem; list-style: disc !important; list-style-type: disc !important;">
+                    <li style="margin-bottom: 2.4rem; list-style-type: disc !important; opacity: 0.2;">
+                      Lesions have visual features used to classify them into benign, precancerous or cancerous
+                    </li>
+                    <li style="margin-bottom: 2.4rem; list-style-type: disc !important; opacity: 0.2;">
+                      Subtle differences in visual features can be hard to detect by the human eye
+                    </li>
+                    <li style="margin-bottom: 2.4rem; list-style-type: disc !important;">
+                      Clinicians could miss lesions or misdiagnose them; leading to unnecessary procedures or delayed treatment and unfavourable outcomes
+                    </li>
+                  </ul>
+                </div>
+                <div class="column">
+                  <img src="images/polyps2.png" alt="polyp" style="width: 65%; height: auto; margin-top: -2.4rem;" />
+                </div>
+              </div>
+            </div>
+            <div style="font-size: 0.8rem; line-height: 1rem !important;">
+              <span>Images source: PICCOLO Dataset. <br/>
+                <a href="https://doi.org/10.3390/app10238501" target="_blank">S´anchez-Peralta, L. F., Pagador, J. B., Pic´on, A., Calder´on, A. J., Polo, F., Andraka, N., Bilbao, R., Glover, B., Saratxaga, C. L., & S´anchez-Margallo, F. M. (2020). PICCOLO White-Light and Narrow-Band Imaging Colonoscopic Dataset: A Performance Comparative of Models and Datasets. Applied Sciences, 10 (23), 8501. https://doi.org/10.3390/app10238501</a>
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 8 -->
+        <section id="section-8" class="bg-gradient-white slide-top" data-section-title="Context">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">Context</h2>
+            <hr>
+            <div>
+              <h3 class="text-subtitle text-gray" style="text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6) !important;">
+                Explainability
+              </h3>
+              <div class="grid ms">
+                <div class="column">
+                  <ul style="margin-top: 2rem; font-size: 2.5rem; list-style: disc !important; list-style-type: disc !important;">
+                    <li style="margin-bottom: 2.4rem; list-style-type: disc !important;">
+                      Clinicians would like to understand the reasoning behind the model’s decisions: what features of the lesion led to its decision
+                    </li>
+                    <li style="margin-bottom: 2.4rem; list-style-type: disc !important;">
+                      To know when to trust the model and when to override its decisions
+                    </li>
+                    <li style="margin-bottom: 2.4rem; list-style-type: disc !important;">
+                      Confidence in the model’s decisions is crucial for its acceptance and adoption
+                    </li>
+                    <li style="margin-bottom: 2.4rem; list-style-type: disc !important;">
+                      Ultimately, to comply with the ethical and legal requirements of the healthcare domain (e.g., Paient's Right to Explanation)
+                    </li>
+                  </ul>
+                </div>
+                <div class="column">
+                  <img src="images/polyps2.png" alt="polyp" style="width: 65%; height: auto; margin-top: -2.4rem;" />
+                </div>
+              </div>
+            </div>
+            <div style="font-size: 0.8rem; line-height: 1rem !important;">
+              <span>Images source: PICCOLO Dataset. <br/>
+                <a href="https://doi.org/10.3390/app10238501" target="_blank">S´anchez-Peralta, L. F., Pagador, J. B., Pic´on, A., Calder´on, A. J., Polo, F., Andraka, N., Bilbao, R., Glover, B., Saratxaga, C. L., & S´anchez-Margallo, F. M. (2020). PICCOLO White-Light and Narrow-Band Imaging Colonoscopic Dataset: A Performance Comparative of Models and Datasets. Applied Sciences, 10 (23), 8501. https://doi.org/10.3390/app10238501</a>
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 9 -->
+        <section id="section-9" class="bg-gradient-white slide-top" data-section-title="Context">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">Current Research Trend</h2>
+            <hr>
+            <h3 class="text-subtitle text-gray" style="text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6) !important;">
+              Virtual Biopsy
+            </h3>
+            <div class="grid sm">
+                <div class="column">
+                  <p style="font-size: 3.5rem; line-height: 6rem;">
+                  A robust, non-invasive alternative in the surveillance and management of several types of cancer.
+                  </p>
+                </div>
+                <div class="column">
+                  <img src="images/news.png" alt="News" class="aligncenter" style="width: 65%; margin-top: -5rem;" />
+                </div>
+              </div>
+            <div style="font-size: 0.8rem; line-height: 1rem !important;">
+              <br/>
+              <span>Virtual Biopsy: A Safer Future for Cancer Management <br/>
+                <a href="https://www.diagnosticimaging.com/view/virtual-biopsy-a-safer-future-for-cancer-management" target="_blank">https://www.diagnosticimaging.com/view/virtual-biopsy-a-safer-future-for-cancer-management</a>
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 10 -->
+        <section id="section-10" class="bg-gradient-white slide-top" data-section-title="Gap and Research Questions">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">Identified Gap</h2>
+            <hr>
+            <img src="images/system1.png" alt="CADx" class="aligncenter" style="width: 65%;" />
+            <div class="size-80" style="margin-top: 1.2rem;">
+              <p style="font-size: 3.5rem; line-height: 6rem;">
+              There are not many AI-aided systems to detect colonic polyps real-time (virtual biopsy), and none of them are explainable*
+              </p>
+            </div>
+            <div style="font-size: 0.8rem; line-height: 1rem !important; position: relative; bottom: -7.5rem;">
+              <span>* Both in literature and on the market; to the best of our knowledge at this time</span><br/>
+              <br/>
+              <span>Image source: GI Genius™ Intelligent Endoscopy Module <br/>
+                <a href="https://www.medtronic.com/covidien/en-us/products/gastrointestinal-artificial-intelligence/gi-genius-intelligent-endoscopy.html" target="_blank">https://www.medtronic.com/covidien/en-us/products/gastrointestinal-artificial-intelligence/gi-genius-intelligent-endoscopy.html</a>
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 11 -->
+        <section id="section-11" class="bg-gradient-white slide-top" data-section-title="Gap and Research Questions">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">Research Questions</h2>
+            <hr>
+            <div class="size-70">
+              <ul style="margin-top: 2rem; font-size: 2.5rem; list-style: disc !important; list-style-type: disc !important;">
+                <li style="margin-bottom: 2.4rem; list-style-type: disc !important;">
+                  How do CapsNets serve as an appropriate architecture for diagnostics in medical imaging?
+                </li>
+                <li style="margin-bottom: 2.4rem; list-style-type: disc !important;">
+                  What are the abilities and limitations of SSL methods for pre-training models in medical imaging?
+                </li>
+                <li style="margin-bottom: 2.4rem; list-style-type: disc !important;">
+                  To what degree is the output of CapsNets interpretable?
+                  <ul>
+                    <li>How can the resulting interpretations feed into explanations that are meaningful for clinicians?</li>
+                  </ul>
+                </li>
+              </ul>
+          </div>
+        </section>
+
+        <!-- Slide 12 -->
+        <section id="section-12" class="bg-gradient-white slide-top" data-section-title="Contributions">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">Contributions</h2>
+            <hr>
+            <div class="size-90">
+              <ol style="font-size: 2.5rem;">
+                <li style="margin-bottom: 3.2rem;">
+                  Two peer-reviewed papers:
+                  <ul>
+                    <li>
+                      A review of capsule networks in medical image analysis (El-Shimy et al., 2022);
+                      <span class="citation">
+                        <span class="citation-icon">ℹ️</span>
+                        <div class="tooltip">
+                          El-Shimy, H., Zantout, H., Lones, M., & Gayar, N. E. (2022). A review of capsule networks in medical image analysis. Lecture notes in computer science, 65– 80.
+                          <a href='https://doi.org/10.1007/978-3-031-20650-4\_6' target='_blank'>https://doi.org/10.1007/978-3-031-20650-4\_6</a>
+                        </div>
+                      </span>
+                    </li>
+                    <li>
+                      Self-Supervised Learning for Pre-training Capsule Networks: Overcoming Medical Imaging Dataset Challenges (accepted, publishing in progress)(El-Shimy et al., 2025)
+                      <span class="citation">
+                        <span class="citation-icon">ℹ️</span>
+                        <div class="tooltip">
+                          El-Shimy, H., Zantout, H., Lones, M. A., & Gayar, N. E. (2025). Self-supervised learning for pre-training capsule networks: Overcoming medical imaging dataset challenges.
+                          <a href='https://arxiv.org/abs/2502.04748' target='_blank'>https://arxiv.org/abs/2502.04748</a>
+                        </div>
+                      </span>
+                    </li>
+                  </ul>
+                </li>
+                <li style="margin-bottom: 3.2rem;">
+                  Developing ModCapsNet, a novel capsule network architecture that generalises across classification, segmentation, and localisation tasks:
+                  <ul>
+                    <li>
+                      Advanced training strategies and adapted loss function;
+                    </li>
+                    <li>
+                      Novel Dual-Lane architecture for processing multi-modal (WL &amp; NBI) images;
+                    </li>
+                  </ul>
+                </li>
+                <li style="margin-bottom: 3.2rem;">
+                  Creating a SSL framework for pre-training CapsNet that outperforms ImageNet pre-training
+                </li>
+                <li style="margin-bottom: 3.2rem;">
+                  Devising a novel interpretability framework for CapsNets, enabling the generation of explanations in medical terminology
+                </li>
+              </ol>
+          </div>
+        </section>
+
+        <!-- Slide 13 -->
+        <section id="section-13" class="bg-gradient-white slide-top" data-section-title="Introduction to Capsule Networks">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular">Capsule Network Architecture</h2>
+            <hr>
+            
+            <div class="grid sm vertical-align" style="margin-top: -3.6rem;"> 
+              <div class="column">
+                <ul class="description">
+                  <li style="line-height: 1.6rem !important;">
+                    <strong>Inverse Graphics:</strong><br/> 
+                    <span style="font-size: 1.4rem;">Conv layers →  vector-based capsules; learn an object's properties from image as opposed to rendering an objects as an image using geometric properties</span><br/>
+                    <p>
+                      \begin{aligned}
+                        \text{PrimaryCaps} = \text{Reshape}(\text{ConvOutput},\\
+                           [N, H, W, C, D])
+                      \end{aligned}
+                    </p>
+                  </li>
+                  <li style="line-height: 1.6rem !important;">
+                    <strong>Dynamic Routing:</strong><br/>
+                    <span style="font-size: 1.4rem;">Agreement-based connections between capsules</span>
+                    <p>
+                      \begin{aligned}
+                      \mathbf{\hat{u}}_{j|i} &= W_{ij} \mathbf{u}_i \\
+                      c_{ij} &= \frac{\exp(b_{ij})}{\sum_k \exp(b_{ik})} \\
+                      s_j &= \sum_i c_{ij} \mathbf{\hat{u}}_{j|i} \\
+                      \mathbf{v}_j &= \frac{||s_j||^2}{1+||s_j||^2} \frac{s_j}{||s_j||} \\
+                      b_{ij} &\leftarrow b_{ij} + \mathbf{\hat{u}}_{j|i} \cdot \mathbf{v}_j
+                      \end{aligned}
+                    </p>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="column">
+                <div class="capsnet-visualization-container" style="height: 50vh; width: 100%; border: 1px solid #eee; border-radius: 4px; overflow: hidden;">
+                  <iframe src="assets/capsnet-visualization/index.html" style="width: 100%; height: 100%; border: none;"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 14 -->
+        <section id="section-14" class="bg-gradient-white slide-top" data-section-title="Introduction to Capsule Networks">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular">ModCapsNet</h2>
+            <hr>
+            
+            <ul class="flexblock blink" style="margin-top: -4rem; margin-left: -4rem;">
+              <li style="text-align: center;"><img src="images/ModCapsNet_Seg.png" alt="ModCapsNet" class="zoomable-image aligncenter" style="width: 50%; height: auto; cursor: pointer;" />Segmentation</li>
+              <li style="text-align: center;"><img src="images/ModCapsNet_Cls.png" alt="ModCapsNet" class="zoomable-image aligncenter" style="width: 50%; height: auto; cursor: pointer;" />Classification</li>
+            </ul>
+            <ul class="flexblock blink" style="margin-left: -4rem;">
+              <li style="text-align: center;"><img src="images/ModCapsNetDet.png" alt="ModCapsNet" class="zoomable-image aligncenter" style="width: 50%; height: auto; cursor: pointer;" />Polyp Detection</li>
+              <li style="text-align: center; margin-top: -4rem;"><img src="images/ModCapsNet_Cls_Dual.png" alt="ModCapsNet" class="zoomable-image aligncenter" style="width: 40%; height: auto; cursor: pointer;" />Multi-modal</li>
+            </ul>
+        </section>
+
     </main>
     <!--main-->
+
+
+    <!-- Image Overlay Container -->
+    <div id="imageOverlay" class="image-overlay">
+        <div class="overlay-content" style="background-color: rgb(255 255 255); color: #333;">
+          <span class="close-button">&times;</span>
+          <img id="expandedImg" src="" alt="Expanded Image">
+          <div id="overlayCaption"></div>
+        </div>
+      </div>
+    </section>
 
     <!-- Progress Bar -->
     <div class="progress-bar">
@@ -103,6 +526,7 @@
     
     <script src="js/progress-bar.js"></script>
     <script src="js/logo.js"></script>
+    <script src="js/image-expand.js"></script>
 
     <!-- OPTIONAL - svg-icons.js (fontastic.me - Font Awesome as svg icons) -->
     <script defer src="js/svg-icons.js"></script>
