@@ -69,3 +69,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Get all citation icons that are magnifying glasses
+  const magnifyingGlassIcons = document.querySelectorAll('.citation-icon');
+  
+  magnifyingGlassIcons.forEach(icon => {
+    if (icon.textContent === '🔍') {
+      icon.style.cursor = 'pointer';
+      
+      icon.addEventListener('click', function() {
+        const overlay = document.getElementById('imageOverlay');
+        const expandedImg = document.getElementById('expandedImg');
+        
+        // Determine which visualization to show based on which slide/icon was clicked
+        if (this.closest('#section-21')) {
+          expandedImg.src = 'images/explanations.png'; // Replace with your actual image path
+          document.getElementById('overlayCaption').textContent = 'Semantic Similarity Visualization';
+        } else if (this.closest('#section-22')) {
+          expandedImg.src = 'images/ip.png'; // Replace with your actual image path
+          document.getElementById('overlayCaption').textContent = 'Parameter Analysis Visualization';
+        }
+        
+        overlay.style.display = 'block';
+      });
+    }
+  });
+});
