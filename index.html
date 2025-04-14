@@ -28,6 +28,7 @@
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pts/0.10.6/pts.min.js"></script>
   </head>
 
   <body>
@@ -115,27 +116,27 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#slide=5" title="Go to Methodology">
+                  <a href="#slide=15" title="Go to Methodology">
                     <span class="chapter">Methodology</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#slide=5" title="Go to Key Results">
+                  <a href="#slide=17" title="Go to Key Results">
                     <span class="chapter">Key Results</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#slide=5" title="Go to CapsNets Explainability">
+                  <a href="#slide=20" title="Go to CapsNets Explainability">
                     <span class="chapter">CapsNets Explainability</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#slide=5" title="Go to Impact and Applications">
-                    <span class="chapter">Impact and Applications</span>
+                  <a href="#slide=23" title="Go to Applications and Impact">
+                    <span class="chapter">Applications and Impact</span>
                   </a>
                 </li>
                 <li>
-                  <a href="#slide=5" title="Go to Conclusions">
+                  <a href="#slide=24" title="Go to Conclusions">
                     <span class="chapter">Conclusions</span>
                   </a>
                 </li>
@@ -430,7 +431,7 @@
         <!-- Slide 13 -->
         <section id="section-13" class="bg-gradient-white slide-top" data-section-title="Introduction to Capsule Networks">
           <div class="wrap" style="margin: 1rem 0 0 5rem;">
-            <h2 class="dm-serif-text-regular">Capsule Network Architecture</h2>
+            <h2 class="dm-serif-text-regular slide-title">Capsule Network Architecture</h2>
             <hr>
             
             <div class="grid sm vertical-align" style="margin-top: -3.6rem;"> 
@@ -474,7 +475,7 @@
         <!-- Slide 14 -->
         <section id="section-14" class="bg-gradient-white slide-top" data-section-title="Introduction to Capsule Networks">
           <div class="wrap" style="margin: 1rem 0 0 5rem;">
-            <h2 class="dm-serif-text-regular">ModCapsNet</h2>
+            <h2 class="dm-serif-text-regular slide-title">ModCapsNet</h2>
             <hr>
             
             <ul class="flexblock blink" style="margin-top: -4rem; margin-left: -4rem;">
@@ -485,6 +486,224 @@
               <li style="text-align: center;"><img src="images/ModCapsNetDet.png" alt="ModCapsNet" class="zoomable-image aligncenter" style="width: 50%; height: auto; cursor: pointer;" />Polyp Detection</li>
               <li style="text-align: center; margin-top: -4rem;"><img src="images/ModCapsNet_Cls_Dual.png" alt="ModCapsNet" class="zoomable-image aligncenter" style="width: 40%; height: auto; cursor: pointer;" />Multi-modal</li>
             </ul>
+        </section>
+
+        <!-- Slide 15 -->
+        <section id="section-15" class="bg-gradient-white slide-top" data-section-title="Methodology">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">Methodology</h2>
+            <hr>
+            <ul class="flexblock clients" style="margin-right: 5rem !important;">
+              <li style="text-align: center;">
+                <h4 style="margin-bottom: 2.4rem;">PICCOLO</h4>
+                <p>3,433 frames; in NBI &amp; WL modalities</p>
+                <p>High-quality frames with extenstive annotations</p>
+                <p>Small, imbalanced, and exhibits distributional shifts</p>
+                <p>Excellent for testing the capability of CapsNet in handling small and imbalanced data; and creating clinically-relevant explanations</p>
+              </li>
+              <li style="text-align: center;">
+                <h4 style="margin-bottom: 2.4rem;">PolypSet</h4>
+                <p>37,899 frames; in NBI &amp; WL modalities</p>
+                <p>Comprises 4 different datasets</p>
+                <p>High variability in quality between frames</p>
+                <p>Used for benchmarking and pre-training purposes</p>
+              </li>
+            </ul>
+        </section>
+
+        <!-- Slide 16 -->
+        <section id="section-16" class="bg-gradient-white slide-top" data-section-title="Methodology">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">Data Preprocessing</h2>
+            <hr>
+            <img src="images/pipeline.png" alt="Preprocessing" class="aligncenter" style="width: 75%; margin-top: -2.4rem;" />
+          </div>
+        </section>
+
+        <!-- Slide 17 -->
+        <section id="section-17" class="bg-gradient-white slide-top" data-section-title="Key Results">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">Key Results</h2>
+            <hr>
+            <h3 class="text-subtitle text-gray" style="text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6) !important; margin-top: -2.4rem;">
+              Segmentation
+            </h3>
+            <ul class="flexblock features" style="margin-right: 5rem !important; margin-top: -0.2rem;">
+              <li>
+                <img src="images/results-seg.png" alt="Results table" class="aligncenter" style="width: 80%;" />
+              </li>
+              <li>
+                <img src="images/figure-seg.png" alt="Sample outputs" class="aligncenter" style="width: 80%;" />
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Slide 18 -->
+        <section id="section-18" class="bg-gradient-white slide-top" data-section-title="Key Results">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">Key Results</h2>
+            <hr>
+            <h3 class="text-subtitle text-gray" style="text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6) !important; margin-top: -2.4rem;">
+              Polyp Localisation
+            </h3>
+            <ul class="flexblock features" style="margin-right: 5rem !important; margin-top: -0.2rem;">
+              <li>
+                <img src="images/results-det.png" alt="Results table" class="aligncenter" style="width: 75%;" />
+              </li>
+              <li>
+                <img src="images/figure-det.png" alt="Sample outputs" class="aligncenter" style="width: 75%; margin-right: 5rem;" />
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Slide 19 -->
+        <section id="section-19" class="bg-gradient-white slide-top" data-section-title="Key Results">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">Key Results</h2>
+            <hr>
+            <h3 class="text-subtitle text-gray" style="text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6) !important; margin-top: -2.4rem;">
+              Classification
+            </h3>
+            <ul class="flexblock features" style="margin-right: 5rem !important; margin-top: -0.2rem;">
+              <li>
+                <div style="overflow: hidden; height: 400px !important; display: block;">
+                  <div style="overflow-y: auto; height: 100%; max-height: 400px;">
+                    <img src="images/results-cls.png" alt="Results table" class="aligncenter" style="width: 100%;" />
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div style="overflow: hidden; height: 400px !important; display: block;">
+                  <div style="overflow-y: auto; height: 100%; max-height: 400px;">
+                    <img src="images/results-cls2.png" alt="Results table" class="aligncenter" style="width: 100%;" />
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Slide 20 -->
+        <section id="section-20" class="bg-gradient-white slide-top" data-section-title="CapsNet Explainability">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">CapsNet Explainability</h2>
+            <hr>
+            
+            <div style="margin-right: 5rem;">
+              <div class="capsnet-visualization-container" style="height: 50vh; width: 100%; border: 1px solid #eee; border-radius: 4px; overflow: hidden;">
+                <iframe src="assets/capsnet-visualization/routing.html" style="width: 100%; height: 100%; border: none;"></iframe>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 21 -->
+        <section id="section-21" class="bg-gradient-white slide-top" data-section-title="CapsNet Explainability">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">CapsNet Explainability</h2>
+            <hr>
+            
+            <div style="padding-right: 3.5rem !important;">
+              <ul class="flexblock blink">
+                <li>
+                  <ul style="list-style: disc !important; list-style-type: disc !important; display: block; font-size: 2.4rem; font-weight: 400;">
+                    <li style="list-style-type: disc !important; margin-bottom: 2.4rem;">Our innovative interpretability framework enables extracting capsules with the highest agreement scores; influencing the model's decision.</li>
+                    <li style="list-style-type: disc !important; margin-bottom: 2.4rem;">Projecting these capsule vectors onto a shared embedding space, along with text embeddings of polyp features in medical terms provides a clinically-relevant explanation stemming from the network's inner workings.</li>
+                    <li style="list-style-type: disc !important; margin-bottom: 2.4rem;">Our findings indicate that capsules endcoded rich visual features of polyps that were successfully translated to terminology used by physicians.</li>
+                  </ul>
+                </li>
+                <li style="position: relative; min-height: 400px;">
+                  <!-- Container for the Pts.js animation -->
+                  <div id="pts-animation" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; min-height: 400px; z-index:-10;
+                    opacity: 0.8;"></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 22 -->
+        <section id="section-22" class="bg-gradient-white slide-top" data-section-title="CapsNet Explainability">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">CapsNet Explainability</h2>
+            <hr>
+            <h3 class="text-subtitle text-gray" style="text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6) !important; margin-top: -2.4rem;">
+              Deeper dive into capsules using <span style="text-transform: none !important;">SAEs</span>
+            </h3>
+            <div style="padding-right: 3.5rem !important; margin-top: 2.4rem;">
+              <ul class="flexblock blink">
+                <li>
+                  <ul style="list-style: disc !important; list-style-type: disc !important; display: block; font-size: 2.4rem; font-weight: 400;">
+                    <li style="list-style-type: disc !important; margin-bottom: 2.4rem;">SAEs disentangle the complex representations within capsule vectors, isolating individual parameters.</li>
+                    <li style="list-style-type: disc !important; margin-bottom: 2.4rem;">This granular decomposition reveals how the network encodes properties such as texture patterns, colour variations, and morphological characteristics that are diagnostically significant.</li>
+                    <li style="list-style-type: disc !important; margin-bottom: 2.4rem;">Results demonstrated that specific instantiation parameters consistently activate in response to particular medical features across multiple samples, confirming that the network learns meaningful and interpretable representations.</li>
+                  </ul>
+                </li>
+                <li style="position: relative; min-height: 400px;">
+                  <!-- Container for the Pts.js animation -->
+                  <div id="pts-animation" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; min-height: 400px; z-index:-10;
+                    opacity: 0.8;"></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 23 -->
+        <section id="section-23" class="bg-gradient-white slide-top" data-section-title="Applications and Impact">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">Applications and Impact</h2>
+            <hr>
+            
+            <div style="padding-right: 3.5rem !important;">
+              <ul class="flexblock blink">
+                <li>
+                  <ul style="list-style: disc !important; list-style-type: disc !important; display: block; font-size: 2.4rem; font-weight: 400;">
+                    <li style="list-style-type: disc !important; margin-bottom: 2.4rem;">We envision a CADe/x system that aids physicians in detecting polyps in real-time, classify and diagnose polyps, and explain the polyp's characteristics that contributed to the diagnosis.</li>
+                    <li style="list-style-type: disc !important; margin-bottom: 2.4rem;">Initial meetings with physicians validate our idea and indicated the need for such CADe/x system as a useful aid, as well as a training tool for medical students and junior doctors*.</li>
+                    <li style="list-style-type: disc !important; margin-bottom: 2.4rem;">The proposed system could be integrated with existing endoscopic equipment, and could be used even in medical facilities in low-income countries where access to medical expertise is limited.</li>
+                    <li style="list-style-type: disc !important; margin-bottom: 2.4rem;">True potential for saving lives.</li>
+                  </ul>
+                </li>
+                <li style="position: relative; min-height: 400px;">
+                  <img src="images/app.png" alt="Impact" class="aligncenter" style="width: 100%; filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.28)); border-radius: 5px;" /> 
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 24 -->
+        <section id="section-24" class="bg-gradient-white slide-top" data-section-title="Conclusions">
+          <div class="wrap" style="margin: 1rem 0 0 5rem;">
+            <h2 class="dm-serif-text-regular slide-title">Conclusions</h2>
+            <hr>
+            <div class="size-70">
+              <ul style="margin-top: 2rem; font-size: 2.5rem; list-style: disc !important; list-style-type: disc !important;">
+                <li style="margin-bottom: 2.4rem; list-style-type: disc !important;">
+                  CapsNets are a promising architecture for medical imaging tasks, especially due to their inherent interpretability and ability to generalise across tasks
+                </li>
+                <li style="margin-bottom: 2.4rem; list-style-type: disc !important;">
+                  Our innovative CapsNet interpretability framework enables the generation of explanations that are meaningful for clinicians, contributing to the field of xAI
+                </li>
+                <li style="margin-bottom: 2.4rem; list-style-type: disc !important;">
+                  Data quality remain key to the success of any AI system, and affect the quality of the generated explanations, not just the model performance
+                </li>
+                <li style="margin-bottom: 2.4rem; list-style-type: disc !important;">
+                  Doctors seeking to use CADe/x systems in their practice are a key part of the development process; their feedback is crucial, and they should be encouraged to help collect and annotate the data with the explanations they expect to get from the system.
+                </li>
+              </ul>
+          </div>
+        </section>
+
+        <!-- Slide 25 -->
+        <section id="section-25" data-section-title="Conclusions">
+          <span class="background" style="background-image:url('images/first.png');"></span>
+          <div class="wrap">
+            <h1 class="text-landing text-serif text-white size-60">Thank You</h1>
+          </div>
         </section>
 
     </main>
@@ -530,6 +749,140 @@
 
     <!-- OPTIONAL - svg-icons.js (fontastic.me - Font Awesome as svg icons) -->
     <script defer src="js/svg-icons.js"></script>
+
+    <!-- Script to initialize the Pts.js animation --> 
+    <script>
+      // Wait for DOM to be fully loaded
+      document.addEventListener('DOMContentLoaded', function() {
+        // Check if Pts.js is loaded
+        if (typeof Pts === 'undefined') {
+          console.error('Pts.js library not loaded. Please include it in your HTML head.');
+          return;
+        }
+        
+        // Animation variables - define at the global level to fix "animations is not defined" error
+        var animations = {};
+        
+        // List of slide IDs that should have the animation
+        const animationSlides = ['section-21', 'section-22'];
+        
+        // Initialize on page load for any visible slide
+        animationSlides.forEach(function(slideId) {
+          if (document.querySelector(`#${slideId}.current`)) {
+            initPtsAnimation(slideId);
+          }
+        });
+        
+        // Set up a simple checker that runs periodically
+        setInterval(function() {
+          animationSlides.forEach(function(slideId) {
+            const slide = document.getElementById(slideId);
+            if (slide && slide.classList.contains('current')) {
+              if (!animations[slideId] || !animations[slideId].isRunning) {
+                initPtsAnimation(slideId);
+              }
+            } else {
+              // If slide is not visible, stop animation
+              if (animations[slideId] && animations[slideId].space) {
+                animations[slideId].space.pause();
+                animations[slideId].isRunning = false;
+              }
+            }
+          });
+        }, 500);  // Check every 500ms
+        
+        // Function to initialize animation on a specific slide
+        function initPtsAnimation(slideId) {
+          // Return if animation is already running
+          if (animations[slideId] && animations[slideId].isRunning) {
+            return;
+          }
+          
+          // Get the container within this slide
+          const container = document.querySelector(`#${slideId} #pts-animation`);
+          if (!container) {
+            console.error('Animation container not found in slide', slideId);
+            return;
+          }
+          
+          // Clear the container
+          container.innerHTML = '';
+          
+          // Create canvas with correct size
+          const canvas = document.createElement('canvas');
+          canvas.id = `pts-canvas-${slideId}`;
+          canvas.style.width = '100%';
+          canvas.style.height = '100%';
+          container.appendChild(canvas);
+          
+          // Initialize Pts
+          const space = new Pts.CanvasSpace(`#${canvas.id}`).setup({
+            bgcolor: "transparent", 
+            resize: true,
+            retina: true
+          });
+          const form = space.getForm();
+          
+          // Initialize pairs array
+          var pairs = [];
+          
+          // Add the animation
+          space.add({
+            start: (bound) => {
+              let r = space.size.minValue().value / 2;
+              pairs = []; // Clear existing pairs
+              
+              // create 200 lines
+              for (let i = 0; i < 200; i++) {
+                let ln = new Pts.Group(
+                  Pts.Pt.make(2, r, true),
+                  Pts.Pt.make(2, -r, true)
+                );
+                ln.moveBy(space.center).rotate2D(i * Math.PI / 200, space.center);
+                pairs.push(ln);
+              }
+            },
+            
+            animate: (time, ftime) => {
+              // Clear with transparent background
+              space.clear("transparent");
+              
+              for (let i = 0, len = pairs.length; i < len; i++) {
+                // rotate each line by 0.1 degree and check collinearity with pointer
+                let ln = pairs[i];
+                ln.rotate2D(Pts.Const.one_degree / 10, space.center);
+                let collinear = Pts.Line.collinear(ln[0], ln[1], space.pointer, 0.1);
+                
+                if (collinear) {
+                  // Highlighted lines when collinear - subtle blue
+                  form.stroke("rgba(41, 98, 150, 0.4)").line(ln);
+                } else {
+                  // Regular lines - very faint colors that match your design
+                  let side = Pts.Line.sideOfPt2D(ln, space.pointer);
+                  // Using navy blue and teal tones with very low opacity
+                  form.stroke((side < 0) ? "rgba(23, 55, 94, 0.08)" : "rgba(0, 128, 128, 0.08)").line(ln);
+                }
+                
+                // Very subtle dots at line endpoints - almost invisible
+                form.fillOnly("rgba(200, 200, 200, 0.4)").points(ln, 0.3);
+              }
+              
+              // More subtle pointer indicator - navy blue dot
+              form.fillOnly("rgba(41, 98, 150, 0.7)").point(space.pointer, 2.5, "circle");
+            }
+          });
+          
+          // Start the animation
+          space.bindMouse().bindTouch().play();
+          
+          // Store the animation reference
+          animations[slideId] = {
+            space: space,
+            isRunning: true
+          };
+        }
+      });
+    </script>
 
   </body>
 </html>
